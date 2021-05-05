@@ -13,7 +13,7 @@ add_action( 'template_redirect', __NAMESPACE__ . '\handle_request', 1 );
 function enqueue_scripts() {
 	wp_enqueue_script(
 		'quick-escape-widget',
-		plugin_dir_url( __DIR__ ) . '/quick.js',
+		plugin_dir_url( __DIR__ ) . '/js/src/quick.js',
 		array(),
 		'0.0.2',
 		true
