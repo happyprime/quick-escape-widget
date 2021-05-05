@@ -1,7 +1,13 @@
 {
 	function handleEscape( event ) {
-		const newPageTitle = 'undefined' !== typeof event.target.dataset.pageTitle ? event.target.dataset.pageTitle : 'Google';
-		const redirectURL = 'undefined' !== typeof event.target.href ? event.target.href : 'https://google.com';
+		const newPageTitle =
+			'undefined' !== typeof event.target.dataset.pageTitle
+				? event.target.dataset.pageTitle
+				: 'Google';
+		const redirectURL =
+			'undefined' !== typeof event.target.href
+				? event.target.href
+				: 'https://google.com';
 
 		// Replace the current page's title.
 		document.title = newPageTitle;
