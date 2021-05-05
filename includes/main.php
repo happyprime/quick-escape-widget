@@ -15,7 +15,7 @@ function enqueue_scripts() {
 		'quick-escape-widget',
 		plugin_dir_url( __DIR__ ) . '/quick.js',
 		array(),
-		'0.0.1',
+		'0.0.2',
 		true
 	);
 }
