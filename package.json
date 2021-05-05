@@ -8,7 +8,7 @@
     "@wordpress/scripts": "^15.0.1"
   },
   "scripts": {
-	"build": "wp-scripts build quick.js --output-path=js/build/",
+	"build": "wp-scripts build js/src/quick.js --output-path=js/build/",
 	"format": "wp-scripts format",
 	"lint": "wp-scripts lint-js"
   },
