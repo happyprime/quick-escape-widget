@@ -1,0 +1,25 @@
+{
+  "name": "quick-escape-widget",
+  "version": "0.0.3",
+  "description": "Display a quick escape link in any sidebar or widget area.",
+  "main": "quick.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@wordpress/scripts": "^15.0.1"
+  },
+  "scripts": {
+	"build": "wp-scripts build quick.js --output-path=js/build/",
+	"format": "wp-scripts format",
+	"lint": "wp-scripts lint-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happyprime/quick-escape-widget.git"
+  },
+  "author": "",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/happyprime/quick-escape-widget/issues"
+  },
+  "homepage": "https://github.com/happyprime/quick-escape-widget#readme"
+}
