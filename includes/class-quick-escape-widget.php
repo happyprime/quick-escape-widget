@@ -26,12 +26,48 @@ class Quick_Escape_Widget extends \WP_Widget {
 		}
 
 		$title      = isset( $instance['title'] ) ? $instance['title'] : 'Quick Escape';
+		$hover_text = isset( $instance['hover_text'] ) ? $instance['hover_text'] : 'Leave this site quickly.';
 		$url        = isset( $instance['url'] ) ? $instance['url'] : 'https://google.com';
 		$page_title = isset( $instance['page_title'] ) ? $instance['page_title'] : 'Google';
+		$styles     = isset( $instance['styles'] ) ? $instance['styles'] : 'on';
+
+		// Build the span element that will be included as part of the anchor.
+		$hover_html = '<span class="qe-focus-title">' . esc_html( $hover_text ) . ' </span>';
 
 		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+		if ( 'on' === $styles ) {
+			?>
+			<style>
+				.qe-focus-title {
+					clip: rect(1px, 1px, 1px, 1px);
+					height: 1px;
+					overflow: hidden;
+					position: absolute !important;
+					width: 1px;
+					word-wrap: normal !important;
+				}
+
+				.qe-anchor {
+					position: relative;
+				}
+
+				.qe-anchor:focus .qe-focus-title,
+				.qe-anchor:hover .qe-focus-title {
+					clip: unset;
+					height: auto;
+					width: 11rem;
+					top: 6rem;
+					right: 0;
+					color: #000;
+					text-align: right;
+				}
+			</style>
+			<?php
+		}
+
 		?>
-		<a href="<?php echo esc_url( $url ); ?>" class="js-quick-escape" data-page-title="<?php echo esc_attr( $page_title ); ?>"><?php echo esc_html( $title ); ?></a>
+		<a href="<?php echo esc_url( $url ); ?>" class="js-quick-escape qe-anchor" data-page-title="<?php echo esc_attr( $page_title ); ?>"><?php echo $hover_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html( $title ); ?></a>
 		<?php
 		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
@@ -47,8 +83,10 @@ class Quick_Escape_Widget extends \WP_Widget {
 		$instance = $old_instance;
 
 		$instance['title']      = sanitize_text_field( $new_instance['title'] );
+		$instance['hover_text'] = sanitize_text_field( $new_instance['hover_text'] );
 		$instance['url']        = esc_url( $new_instance['url'] );
 		$instance['page_title'] = sanitize_text_field( $new_instance['page_title'] );
+		$instance['styles']     = isset( $new_instance['styles'] ) && 'on' === $new_instance['styles'] ? 'on' : 'off';
 
 		// Store a _transient_ prefixed option to avoid complaints by the customizer that a non-widget
 		// option is being stored. There's probably a nicer way to do this, but here we are.
@@ -64,18 +102,25 @@ class Quick_Escape_Widget extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 		$title      = isset( $instance['title'] ) ? $instance['title'] : 'Quick Escape';
+		$hover_text = isset( $instance['hover_text'] ) ? $instance['hover_text'] : 'Leave this site quickly.';
 		$url        = isset( $instance['url'] ) ? $instance['url'] : 'https://google.com';
 		$page_title = isset( $instance['page_title'] ) ? $instance['page_title'] : 'Google';
 
 		?>
-		<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title' ); ?>:</label>
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Link text', 'quick-escape-widget' ); ?>:</label>
 		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
 
-		<p><label for="<?php echo esc_attr( $this->get_field_id( 'url' ) ); ?>"><?php esc_html_e( 'URL' ); ?>:</label>
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'hover_text' ) ); ?>"><?php esc_html_e( 'Hover text', 'quick-escape-widget' ); ?>:</label>
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'hover_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'hover_text' ) ); ?>" type="text" value="<?php echo esc_attr( $hover_text ); ?>" /></p>
+
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'url' ) ); ?>"><?php esc_html_e( 'Redirect URL', 'quick-escape-widget' ); ?>:</label>
 		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'url' ) ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>" /></p>
 
-		<p><label for="<?php echo esc_attr( $this->get_field_id( 'page_title' ) ); ?>"><?php esc_html_e( 'Page Title', 'quick-escape-widget' ); ?>:</label>
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'page_title' ) ); ?>"><?php esc_html_e( 'Replacement page title', 'quick-escape-widget' ); ?>:</label>
 		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'page_title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'page_title' ) ); ?>" type="text" value="<?php echo esc_attr( $page_title ); ?>" /></p>
+
+		<p><label for="<?php echo esc_attr( $this->get_field_id( 'styles' ) ); ?>"><input class="checkbox" type="checkbox" <?php checked( $instance['styles'], 'on' ); ?> id="<?php echo esc_attr( $this->get_field_id( 'styles' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'styles' ) ); ?>" />
+		Include default styles</label></p>
 		<?php
 	}
 }
