@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  Quick Escape Widget
  * Description:  Display a quick escape link in any sidebar or widget area.
- * Version:      0.0.2
+ * Version:      0.0.3
  * Plugin URI:   https://github.com/happyprime/quick-escape-widget/
  * Author:       Happy Prime
  * Author URI:   https://happyprime.co
