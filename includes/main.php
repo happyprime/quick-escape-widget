@@ -15,7 +15,7 @@ function enqueue_scripts() {
 
 	wp_enqueue_script(
 		'quick-escape-widget',
-		plugin_dir_url( __DIR__ ) . '/js/src/quick.js',
+		plugin_dir_url( __DIR__ ) . '/js/build/quick.js',
 		$asset_data['dependencies'],
 		$asset_data['version'],
 		true
