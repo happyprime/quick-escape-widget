@@ -1,4 +1,9 @@
 <?php
+/**
+ * Main plugin file.
+ *
+ * @package QuickEscapeWidget
+ */
 
 namespace QuickEscapeWidget\Setup;
 

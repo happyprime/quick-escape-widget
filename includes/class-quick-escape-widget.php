@@ -1,7 +1,15 @@
 <?php
+/**
+ * Quick Escape Widget class.
+ *
+ * @package QuickEscapeWidget
+ */
 
 namespace QuickEscapeWidget\Widget;
 
+/**
+ * Quick Escape Widget class.
+ */
 class Quick_Escape_Widget extends \WP_Widget {
 	/**
 	 * Initialize the Quick Escape Widget.

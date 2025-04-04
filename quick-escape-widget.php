@@ -9,7 +9,13 @@
  * Text Domain:  quick-escape-widget
  * Domain Path:  /languages/
  * Requires PHP: 7.4
+ *
+ * @package QuickEscapeWidget
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 require_once __DIR__ . '/includes/class-quick-escape-widget.php';
 require_once __DIR__ . '/includes/main.php';
