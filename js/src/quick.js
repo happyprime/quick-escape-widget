@@ -1,5 +1,9 @@
 {
-	function handleEscape( event ) {
+	/**
+	 *
+	 * @param event
+	 */
+	function handleEscape(event) {
 		const newPageTitle =
 			'undefined' !== typeof event.target.dataset.pageTitle
 				? event.target.dataset.pageTitle
@@ -13,7 +17,7 @@
 		document.title = newPageTitle;
 
 		// Append a redirect parameter to the current page's URL.
-		window.history.replaceState( {}, '', '?qew=1' );
+		window.history.replaceState({}, '', '?qew=1');
 
 		// Redirect to the new page.
 		window.location.href = redirectURL;
@@ -21,15 +25,15 @@
 		event.preventDefault();
 	}
 
-	document.addEventListener( 'DOMContentLoaded', () => {
-		const quickEscapes = document.querySelectorAll( '.js-quick-escape' );
+	document.addEventListener('DOMContentLoaded', () => {
+		const quickEscapes = document.querySelectorAll('.js-quick-escape');
 
-		quickEscapes.forEach( ( el ) => {
-			if ( 'undefined' === typeof el ) {
+		quickEscapes.forEach((el) => {
+			if ('undefined' === typeof el) {
 				return;
 			}
 
-			el.addEventListener( 'click', handleEscape );
-		} );
-	} );
+			el.addEventListener('click', handleEscape);
+		});
+	});
 }
