@@ -1,0 +1,25 @@
+{
+	"name": "happyprime/quick-escape-widget",
+	"description": "Quick Escape Widget",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true,
+			"phpstan/extension-installer": true
+		},
+		"platform": {
+			"php": "7.4"
+		}
+	},
+	"require-dev": {
+		"happyprime/coding-standards": "*",
+		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
+	},
+	"scripts": {
+		"phpcs": "vendor/bin/phpcs",
+		"phpcbf": "vendor/bin/phpcbf",
+		"phpstan": "vendor/bin/phpstan analyse --memory-limit=2048M"
+	}
+}

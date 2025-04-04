@@ -11,13 +11,11 @@ add_action( 'template_redirect', __NAMESPACE__ . '\handle_request', 1 );
  * Enqueue the script used by this plugin.
  */
 function enqueue_scripts() {
-	$asset_data = require_once dirname( __DIR__ ) . '/js/build/quick.asset.php';
-
 	wp_enqueue_script(
 		'quick-escape-widget',
-		plugin_dir_url( __DIR__ ) . '/js/build/quick.js',
-		$asset_data['dependencies'],
-		$asset_data['version'],
+		plugin_dir_url( __DIR__ ) . '/build/index.js',
+		[],
+		filemtime( plugin_dir_path( __DIR__ ) . 'build/index.js' ),
 		true
 	);
 }
