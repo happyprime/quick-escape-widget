@@ -114,6 +114,7 @@ class Quick_Escape_Widget extends \WP_Widget {
 		$url        = isset( $instance['url'] ) ? $instance['url'] : 'https://google.com';
 		$page_title = isset( $instance['page_title'] ) ? $instance['page_title'] : 'Google';
 
+		ob_start();
 		?>
 		<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Link text', 'quick-escape-widget' ); ?>:</label>
 		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
@@ -130,5 +131,8 @@ class Quick_Escape_Widget extends \WP_Widget {
 		<p><label for="<?php echo esc_attr( $this->get_field_id( 'styles' ) ); ?>"><input class="checkbox" type="checkbox" <?php checked( $instance['styles'], 'on' ); ?> id="<?php echo esc_attr( $this->get_field_id( 'styles' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'styles' ) ); ?>" />
 		Include default styles</label></p>
 		<?php
+		$form = ob_get_clean();
+
+		return $form ? $form : '';
 	}
 }
